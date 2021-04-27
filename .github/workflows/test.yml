@@ -14,4 +14,6 @@ jobs:
     name: A job to say hello
     steps:
     - run: |
+        echo $DEPLOY
         echo $ENV
+        echo $RELEASE
