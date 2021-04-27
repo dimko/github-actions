@@ -6,4 +6,4 @@ jobs:
     name: A job to say hello
     steps:
     - run: |
-        echo ${{ github.event.name }}
+        echo ${github.event.name}
