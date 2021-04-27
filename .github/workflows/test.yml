@@ -5,7 +5,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      ENV: 'staging'
+      ENV: 'testing'
       DEPLOY: 'false'
       RELEASE: 'false'
       MULTIPLICITY: ''
