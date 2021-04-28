@@ -38,13 +38,12 @@ runs:
           COLOR=orange
         fi
 
-        service=${{ inputs.service-name }}
-        curl "https://img.shields.io/badge/coverage-$total%25-$COLOR?label=$service" > ${{ inputs.service-name }}.svg
+        curl "https://img.shields.io/badge/coverage-$total%25-$COLOR" > ${{ inputs.service-name }}.svg
         curl "https://img.shields.io/badge/date-$(date)-blue" > ${{ inputs.service-name }}_date.svg
 
-        gsutil  -h "Cache-Control: no-cache" cp ${{ inputs.service-name }}.svg gs://${{ inputs.bucket }}/${{ inputs.service-name }}.svg
+        gsutil  -h "Cache-Control: max-age=0, no-store" cp ${{ inputs.service-name }}.svg gs://${{ inputs.bucket }}/${{ inputs.service-name }}.svg
         gsutil acl ch -u AllUsers:R gs://${{ inputs.bucket }}/${{ inputs.service-name }}.svg
 
-        gsutil  -h "Cache-Control: no-cache" cp ${{ inputs.service-name }}_date.svg gs://${{ inputs.bucket }}/${{ inputs.service-name }}_date.svg
+        gsutil  -h "Cache-Control: max-age=0, no-store" cp ${{ inputs.service-name }}_date.svg gs://${{ inputs.bucket }}/${{ inputs.service-name }}_date.svg
         gsutil acl ch -u AllUsers:R gs://${{ inputs.bucket }}/${{ inputs.service-name }}_date.svg
       shell: bash
