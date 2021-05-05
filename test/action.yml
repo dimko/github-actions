@@ -1,0 +1,24 @@
+name: 'test'
+description: 'Generate and upload test code coverage badge'
+inputs:
+  env:
+    description: 'Environment action ran against'
+    required: true
+    default: 'testing'
+  service-name:
+    description: 'Name of the microservice'
+    required: true
+  coverage-report:
+    description: 'Full path to test coreage output file'
+    required: true
+    default: '/tmp/coverage.out'
+  bucket:
+    description: 'Gcloud bucket to publish files'
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - id: coverage-publisher
+      run: |
+        echo 'Hello I've run inside private repo'
+      shell: bash
