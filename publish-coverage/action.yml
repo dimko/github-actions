@@ -15,6 +15,10 @@ inputs:
     description: 'Programming language to run tests for'
     required: true
     default: 'go'
+  folder:
+    description: 'Gcloud bucket Folder to save the files to'
+    required: true
+    default: ''
 runs:
   using: "composite"
   steps:
@@ -41,9 +45,9 @@ runs:
         curl "https://img.shields.io/badge/coverage-$total%25-$COLOR" > ${{ inputs.service-name }}.svg
         curl "https://img.shields.io/badge/date-$(date)-blue" > ${{ inputs.service-name }}_date.svg
 
-        gsutil  -h "Cache-Control: max-age=0, no-store" cp ${{ inputs.service-name }}.svg gs://${{ inputs.bucket }}/${{ inputs.service-name }}.svg
-        gsutil acl ch -u AllUsers:R gs://${{ inputs.bucket }}/${{ inputs.service-name }}.svg
+        gsutil  -h "Cache-Control: max-age=0, no-store" cp ${{ inputs.service-name }}.svg gs://${{ inputs.bucket }}/${{ inputs.folder }}${{ inputs.service-name }}.svg
+        gsutil acl ch -u AllUsers:R gs://${{ inputs.bucket }}/${{ inputs.folder }}${{ inputs.service-name }}.svg
 
-        gsutil  -h "Cache-Control: max-age=0, no-store" cp ${{ inputs.service-name }}_date.svg gs://${{ inputs.bucket }}/${{ inputs.service-name }}_date.svg
-        gsutil acl ch -u AllUsers:R gs://${{ inputs.bucket }}/${{ inputs.service-name }}_date.svg
+        gsutil  -h "Cache-Control: max-age=0, no-store" cp ${{ inputs.service-name }}_date.svg gs://${{ inputs.bucket }}/${{ inputs.folder }}${{ inputs.service-name }}_date.svg
+        gsutil acl ch -u AllUsers:R gs://${{ inputs.bucket }}/${{ inputs.folder }}${{ inputs.service-name }}_date.svg
       shell: bash
