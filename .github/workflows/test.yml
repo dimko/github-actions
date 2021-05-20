@@ -19,3 +19,4 @@ jobs:
         echo $DEPLOY
         echo $ENV
         echo $RELEASE
+        echo ${{ github.ref }}
